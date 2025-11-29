@@ -1,5 +1,5 @@
 % Model: dual-UAV cooperative secure communication system
-% Method: BCD and SCA
+% Algorithm: based on the BCD and SCA
 % Optimize variables and order: (a - p - traj_s - traj_j)
 
 clc;
