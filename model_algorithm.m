@@ -212,12 +212,6 @@ for iter = 1:MAX_Iter
 
         subject to
 
-            R_e3 = ( rel_entr_quad(d_s3_2 ./ gamma_s_2, d_s3_2 ./ gamma_s_2 + 1 ) + rel_entr_quad( d_s3_2 ./ gamma_s_2 + 1 , d_s3_2 ./ gamma_s_2 ) ) / log(2);
-
-            R_sec3 = log(1 + gamma_s_1 ./ d_sk ) / log(2) ...
-                    - ( gamma_s_1 .* (d_s3_1 - d_sk) ) ./ ( log(2) * ( (d_sk).^2 + gamma_s_1 .* d_sk ) ) ...
-                    - ones(K,1) * R_e3;
-
             for k = 1 : K
                 d_s3_1(k,:) >= pow_pos( norms(q_s3 - (Loc_K(:, k) * ones(1,N)) ),2) + H_s^2;
             end
