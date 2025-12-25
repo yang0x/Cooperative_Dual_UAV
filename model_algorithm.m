@@ -1,4 +1,4 @@
-% Model: dual-UAV cooperative secure communication system
+% Model: cooperative dual-UAV system
 % Algorithm: based on the BCD and SCA
 % Optimize variables and order: (a - p - traj_s - traj_j)
 
@@ -99,7 +99,7 @@ epsilon = 1e-4;
 
 for iter = 1:MAX_Iter
     
-    % 1. User Scheduling Optimization - A
+    % 1. Timeslot Scheduling Optimization - A
     for k = 1 : K
         d_sk(k,:) = norms(q_s(:,:) - Loc_K(:, k)).^2 + H_s^2;
         h_sk(k, :) = beta_0./d_sk(k,:);
@@ -134,8 +134,10 @@ for iter = 1:MAX_Iter
 
     cvx_end
     
-    a_k = double(a_k1 > 0.5);  
-
+    [~, max_row] = max(a_k1, [], 1);
+    a_k1_tmp = zeros(size(a_k1));
+    a_k1_tmp(sub2ind(size(a_k1), max_row, 1:size(a_k1,2))) = 1;
+    a_k = a_k1_tmp;
     
     % 2. Transmit Power Optimization - P
     snr_sk =  h_sk / sigma2;
