@@ -115,8 +115,6 @@ for iter = 1:MAX_Iter
             - log(1 + (ps .* h_se) ./ (pj .* h_je + sigma2)) / log(2);
 
     cvx_begin quiet
-
-        cvx_precision medium
     
         variable a_k1(K, N)
 
@@ -143,7 +141,6 @@ for iter = 1:MAX_Iter
     snr_sk =  h_sk / sigma2;
 
     cvx_begin quiet
-        cvx_precision medium
     
         variable ps2(1,N)
         variable pj2(1,N)
@@ -189,7 +186,6 @@ for iter = 1:MAX_Iter
             
 
     cvx_begin quiet
-        cvx_precision medium
     
         variable q_s3(2,N)
         variable d_s3_1(K,N)
@@ -258,8 +254,6 @@ for iter = 1:MAX_Iter
                + param_Pi * ( ( ( 1 + 1/4 * (v_s/param_v0).^4 ).^(1/2) - 1/2 * (v_s/param_v0).^2 ).^(1/2) );
   
     cvx_begin quiet
-
-        cvx_precision medium
     
         variable q_j4(2,N) 
         variable d_j4_1(1,N)
@@ -357,7 +351,7 @@ for iter = 1:MAX_Iter
 end
 
 
-% UAV trajectory figure
+% cooperative dual-UAV trajectory figure
 figure(3);
 hold on;
 grid on;
