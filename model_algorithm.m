@@ -92,12 +92,14 @@ Max_min_ASR = 0;
 
 
 MAX_Iter = 30;
+epsilon = 1e-4;
 res_opt = zeros(1,MAX_Iter);
 res_real = zeros(1,MAX_Iter);
-
-epsilon = 1e-4;
+total_time = 0;
 
 for iter = 1:MAX_Iter
+    
+    tic;
     
     % 1. Timeslot Scheduling Optimization - A
     for k = 1 : K
@@ -304,6 +306,11 @@ for iter = 1:MAX_Iter
        
     q_j(:, :) = q_j4(:, :); 
 
+    iter_time = toc;
+    fprintf('iteration %d, elapsed time: %.4f seconds\n', iter, iter_time);
+
+    total_time = total_time + iter_time;
+
     % After one round of optimization is completed, record the results
     res_opt(1,iter) = cvx_optval;
 
@@ -349,6 +356,9 @@ for iter = 1:MAX_Iter
     end
 
 end
+
+fprintf('Total iterations: %d, total time: %.4f seconds, average time per iteration: %.4f seconds\n', ...
+            MAX_Iter, total_time, total_time/iter);
 
 
 % cooperative dual-UAV trajectory figure
